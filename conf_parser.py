@@ -1,7 +1,12 @@
 import sys, re, json
 
 def parse_dict(value, constants):
-    pass
+    value = value[1:-1]
+    result = {}
+    for pair in value.split(','):
+        key, value = pair.split(' => ')
+        result[key] = parse_value(value, constants)
+    return result
 
 def parse_value(value, constants):
     if re.match(r'^\d+$', value): # integer
