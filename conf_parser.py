@@ -1,13 +1,33 @@
 import sys, re, json
 
-def parse_dict():
+def parse_dict(value, constants):
     pass
 
-def parse_string():
-    pass
+def parse_value(value, constants):
+    if re.match(r'^\d+$', value): # integer
+        return int(value)
+    elif re.match(r'^\d+\.\d+$', value): # float
+        return float(value)
+    elif value.startswith('{') and value.endswith('}'):
+        return parse_dict(value)
+    elif value.startswith('!'):
+        return constants[value[1:]]
+    else: raise ValueError("Invalid value: " + value)
 
-def parse_file():
-    pass
+def parse_file(file_in):
+    constants = {}
+    output = {}
+    with open(file_in, 'r') as f:
+        for line in f:
+            if line.startswith('%'):
+                continue
+            if line.startswith('let'):
+                key, value = line[54].split(' = ')
+                constants[key] = parse_value(value, constants)
+            else:
+                key, value = line.split(' => ')
+                output[key] = parse_value(value, constants)
+
 
 def main():
     if len(sys.argv) < 3:
