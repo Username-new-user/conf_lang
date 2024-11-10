@@ -1,0 +1,11 @@
+%пример конфигурационного файла базы данных
+let base_num = 11
+let base_name = "test base"
+base => {
+    num => !base_num,
+    name => !base_name,
+    etc => {
+        size => 1000,
+        user => "admin"
+    }
+}

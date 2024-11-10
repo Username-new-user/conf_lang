@@ -1,0 +1,11 @@
+%пример конфигурационного файла
+let server_port = 11
+let server_num = 1
+server => {
+    port => !server_port,
+    num => !server_num,
+    etc => {
+        name => "test",
+        on => 0
+    }
+}
