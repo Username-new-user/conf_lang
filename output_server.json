@@ -1,0 +1,10 @@
+{
+    "server =>": {
+        "port": 11,
+        "num": 1,
+        "etc": {
+            "name": "test",
+            "on": 0
+        }
+    }
+}
